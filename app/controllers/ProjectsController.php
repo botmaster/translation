@@ -30,7 +30,8 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		// On affiche la vue de création de projets.
+		return View::make('pages.projects.project_create');
 	}
 
 
@@ -41,7 +42,28 @@ class ProjectsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		// validate
+		// read more on validation at http://laravel.com/docs/validation
+		$rules = array(
+			'name'       => 'required',
+			'description'      => 'required'
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+		// process the login
+		if ($validator->fails()) {
+			return Redirect::to('projects/create')->withErrors($validator);
+		} else {
+			// store
+			$project = new Project;
+			$project->name       		= Input::get('name');
+			$project->description      = Input::get('description');
+			$project->save();
+
+			// redirect
+			Session::flash('message', 'Le projet à été correctement crée !');
+			return Redirect::to('projects');
+		}
 	}
 
 
@@ -66,7 +88,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+
+		// Les données du projet.
+		$project = Project::find($id);
+		return View::make('pages.projects.project_edit')->with('project', $project);
 	}
 
 
@@ -78,7 +103,24 @@ class ProjectsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		// validate
+		// read more on validation at http://laravel.com/docs/validation
+		$rules = array(
+			'name'       => 'required',
+			'description'      => 'required'
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+		// store
+		$project = Project::find($id);
+		$project->name       		= Input::get('name');
+		$project->description      = Input::get('description');
+		$project->save();
+
+		// redirect
+		Session::flash('message', 'Projet mis à jour !');
+		return Redirect::to('projects');
+		
 	}
 
 
@@ -90,7 +132,13 @@ class ProjectsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete
+		$project = Project::find($id);
+		$project->delete();
+
+		// redirect
+		Session::flash('message', 'Projet supprimé !');
+		return Redirect::to('projects');
 	}
 
 
