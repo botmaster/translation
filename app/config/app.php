@@ -122,7 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Zofe\Rapyd\RapydServiceProvider'
+		'Zofe\Rapyd\RapydServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 

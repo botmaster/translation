@@ -2,6 +2,15 @@
 
 class ProjectsController extends \BaseController {
 
+
+
+	protected $project;
+
+	public function __construct(Project $project)
+	{
+			$this->project = $project;
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -12,7 +21,7 @@ class ProjectsController extends \BaseController {
 		
 
 		// La liste des projects.
-		$projects = Project::all();
+		$projects = $this->project->all();
 
 		// Le conteneur de données passées à la vue.
 		$data = array(	'projects_list' => $projects,
@@ -43,57 +52,25 @@ class ProjectsController extends \BaseController {
 	public function store()
 	{
 		// validate
-		// read more on validation at http://laravel.com/docs/validation
-		$rules = array(
-			'name'       => 'required',
-			'description'      => 'required'
-		);
-		$validator = Validator::make(Input::all(), $rules);
+		
+		$this->project->fill(Input::all());
 
-		// process the login
-		if ($validator->fails()) {
-			return Redirect::to('projects/create')->withErrors($validator);
+		if (! $this->project->isValid()) {
+			return Redirect::back()->withInput()->withErrors($this->project->errors);
 		} else {
 			// store
-			$project = new Project;
-			$project->name       		= Input::get('name');
-			$project->description      = Input::get('description');
-			$project->save();
+			/*$project = new Project;
+			$project->name       	= Input::get('name');
+			$project->description   = Input::get('description');
+			$project->save();*/
+
+			$this->project->save();
 
 			// redirect
 			Session::flash('message', 'Le projet à été correctement crée !');
 			return Redirect::to('projects');
 		}
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id_project)
-	{
-
-		return "Voir le projet " . Project::find($id_project)->name;
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-
-		// Les données du projet.
-		$project = Project::find($id);
-		return View::make('pages.projects.project_edit')->with('project', $project);
-	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -112,9 +89,9 @@ class ProjectsController extends \BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 
 		// store
-		$project = Project::find($id);
+		$project = $this->project->find($id);
 		$project->name       		= Input::get('name');
-		$project->description      = Input::get('description');
+		$project->description       = Input::get('description');
 		$project->save();
 
 		// redirect
@@ -122,6 +99,34 @@ class ProjectsController extends \BaseController {
 		return Redirect::to('projects');
 		
 	}
+
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+
+		// Les données du projet.
+		$project = $this->project->find($id);
+		return View::make('pages.projects.project_edit')->with('project', $project);
+	}
+
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id_project)
+	{
+		return "Voir le projet " . $this->project->find($id_project)->name;
+	}
+
 
 
 	/**
@@ -133,7 +138,7 @@ class ProjectsController extends \BaseController {
 	public function destroy($id)
 	{
 		// delete
-		$project = Project::find($id);
+		$project = $this->project->find($id);
 		$project->delete();
 
 		// redirect

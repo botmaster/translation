@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('titre')
-Création d'un projet - Translation
+Cr&eacute;ation d'un projet - Translation
 @stop
 
 @section('content')

@@ -17,11 +17,12 @@ Projets - Translation
 	<li class="list-group-item">{{$project->name}} <br/>
 	{{$project->description}} <br/>
 	{{link_to_route('projects.edit','Éditer',$project->id)}}&nbsp;
+	{{link_to_route('projects.destroy','Supprimer',$project->id)}}&nbsp;
 
 
 	{{ Form::open(array('url' => 'projects/' . $project->id)) }}
 		{{ Form::hidden('_method', 'DELETE') }}
-		{{ Form::submit('Supprimer', array('class' => 'btn btn-warning btn-xs')) }}
+		{{ Form::button('Supprimer', array('type' => 'submit', 'class' => 'link')) }}
 	{{ Form::close() }}
 	</li>
 
