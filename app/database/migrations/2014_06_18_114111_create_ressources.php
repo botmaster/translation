@@ -20,8 +20,10 @@ class CreateRessources extends Migration {
 		{
 			$table->increments('id');
 		    $table->integer('project_id')->unsigned()->index();
-		    $table->string('ressource_name')->unique();
+		    $table->string('ressource_name');
+		    $table->unique(['project_id','ressource_name']);
 		    $table->timestamps();
+		    $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 		});
 
 		Schema::create('ressource_translations', function(Blueprint $table)

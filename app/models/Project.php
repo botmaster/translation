@@ -8,11 +8,9 @@ class Project extends Eloquent {
 		'description' => 'required'
 	];
 
-
 	public $errors;
 
 	protected $fillable = ['name', 'description'];
-
 
 	public function isValid()
 	{
@@ -23,6 +21,6 @@ class Project extends Eloquent {
 		$this->errors = $validator->messages();
 
 		return false;
-	}
+	} 
 
 }

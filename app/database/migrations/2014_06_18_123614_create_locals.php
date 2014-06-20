@@ -27,7 +27,7 @@ class CreateLocals extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ressources');
+		Schema::drop('locals');
 	}
 
 }

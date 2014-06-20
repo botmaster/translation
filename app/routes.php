@@ -15,3 +15,5 @@ Route::get('/', 'HomeController@index');
 
 
 Route::resource('projects', 'ProjectsController');
+
+Route::resource('ressources', 'RessourcesController');

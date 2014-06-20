@@ -14,16 +14,17 @@ Projets - Translation
 <ul class="list-group">
 	@foreach ($data ['projects_list'] as $project)
 
-	<li class="list-group-item">{{$project->name}} <br/>
-	{{$project->description}} <br/>
-	{{link_to_route('projects.edit','Éditer',$project->id)}}&nbsp;
-	{{link_to_route('projects.destroy','Supprimer',$project->id)}}&nbsp;
-
-
-	{{ Form::open(array('url' => 'projects/' . $project->id)) }}
-		{{ Form::hidden('_method', 'DELETE') }}
-		{{ Form::button('Supprimer', array('type' => 'submit', 'class' => 'link')) }}
-	{{ Form::close() }}
+	<li class="list-group-item ">{{$project->name}} <br/>
+	{{$project->description}}
+		<div>
+			{{link_to_route('projects.show','Détail',$project->id, array('class' => 'btn btn-default btn-xs'))}}
+			{{link_to_route('projects.edit','Éditer',$project->id, array('class' => 'btn btn-default btn-xs'))}}
+			{{ Form::open(array('url' => 'projects/' . $project->id)) }}
+				{{ Form::hidden('_method', 'DELETE') }}
+				{{ Form::button('Supprimer', array('type' => 'submit', 'class' => 'btn btn-warning btn-xs')) }}
+			{{ Form::close() }}
+		</div>
+	
 	</li>
 
 	@endforeach

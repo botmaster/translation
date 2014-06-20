@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$this->call('ProjectsTableSeeder');
+		$this->call('RessourcesTableSeeder');
 	}
 
 }

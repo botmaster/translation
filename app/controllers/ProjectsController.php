@@ -31,6 +31,19 @@ class ProjectsController extends \BaseController {
 
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		// Les données du projet.
+		$project = $this->project->find($id);
+		return View::make('pages.projects.project_show')->with('project', $project);
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -41,6 +54,21 @@ class ProjectsController extends \BaseController {
 	{
 		// On affiche la vue de création de projets.
 		return View::make('pages.projects.project_create');
+	}
+
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+
+		// Les données du projet.
+		$project = $this->project->find($id);
+		return View::make('pages.projects.project_edit')->with('project', $project);
 	}
 
 
@@ -98,33 +126,6 @@ class ProjectsController extends \BaseController {
 		Session::flash('message', 'Projet mis à jour !');
 		return Redirect::to('projects');
 		
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-
-		// Les données du projet.
-		$project = $this->project->find($id);
-		return View::make('pages.projects.project_edit')->with('project', $project);
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id_project)
-	{
-		return "Voir le projet " . $this->project->find($id_project)->name;
 	}
 
 

@@ -1,0 +1,1 @@
+/Applications/MAMP/htdocs/translation/laravel-translation/app/views/ressources/create.blade.php
