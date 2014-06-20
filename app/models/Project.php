@@ -21,6 +21,12 @@ class Project extends Eloquent {
 		$this->errors = $validator->messages();
 
 		return false;
-	} 
+	}
+
+
+	public function ressources()
+	{
+		return $this->hasMany('Ressource');
+	}
 
 }

@@ -8,4 +8,17 @@ class Ressource extends \Eloquent {
 	public $translatedAttributes = array('value');
 
 	protected $fillable = ['project_id', 'value', 'ressource_name'];
+
+
+
+	public function projects()
+	{
+		 return $this->belongsTo('Projects');
+	}
+
+
+	public function ressourceTranslations()
+	{
+		return $this->hasMany('RessourceTranslations');
+	}
 }

@@ -11,7 +11,27 @@ D&eacute;tail d'un projet - Translation
 
 <p>{{$project->description}}</p>
 
-<h3>Liste des langues</h3>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi similique veritatis repellendus repellat voluptate sed consequatur porro, eum nobis perspiciatis dolore numquam odio minima eligendi assumenda ea quis laborum.
+<h3>Liste des ressources associées au projet</h3>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>Nom de la ressource</th>
+			<th>Id du projet associé</th>
+			<th>--</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach ($project->ressources as $ressource)
+		<tr>
+			<td>{{ $ressource->id }}</td>
+			<td>{{ $ressource->ressource_name }}</td>
+			<td>{{ $ressource->project_id }}</td>
+			<td></td>
+		</tr>
+		@endforeach
+	</tbody>
+</table>
 
 @stop
