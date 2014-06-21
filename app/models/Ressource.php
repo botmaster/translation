@@ -19,6 +19,6 @@ class Ressource extends \Eloquent {
 
 	public function ressourceTranslations()
 	{
-		return $this->hasMany('RessourceTranslations');
+		return $this->hasMany('RessourceTranslation');
 	}
 }

@@ -18,12 +18,10 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		
-
 		// La liste des projects.
 		$projects = $this->project->all();
 
-		// Le conteneur de données passées à la vue.
+		// Les données passées à la vue.
 		$data = array(	'projects_list' => $projects,
 						'toto' => 'tutu');
 
@@ -40,8 +38,14 @@ class ProjectsController extends \BaseController {
 	public function show($id)
 	{
 		// Les données du projet.
-		$project = $this->project->find($id);
-		return View::make('pages.projects.project_show')->with('project', $project);
+		$project = $this->project->find($id)->first();
+
+		// Les ressources liéés.
+		$ressources  = $project->ressources;
+
+		$data = array('project' => $project);
+
+		return View::make('pages.projects.project_show', $data);
 	}
 
 

@@ -1,6 +1,6 @@
 <?php
 
-class RessourceTranslations extends \Eloquent {
+class RessourceTranslation extends \Eloquent {
 
 
 	protected $fillable = ['value'];
