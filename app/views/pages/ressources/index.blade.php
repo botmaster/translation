@@ -9,12 +9,12 @@ Liste des ressources - Translation
 	<h2>Liste des ressources</h2>
 </div>
 
-@foreach ($data ['ressources_list'] as $ressource)
+@foreach ($ressources_list as $ressource)
 	<p>
-		nom de la ressource : {{$ressource->ressource_name}} <br/>
+		Nom de la ressource : {{$ressource->ressource_name}} <br/>
 
 		@foreach ($ressource->ressourceTranslations as $ressource_translation)
-			{{$ressource_translation->locale}}
+			- locale : {{$ressource_translation->locale}}, - valeur : {{$ressource_translation->value}} <br/>
 		@endforeach
 
 	</p>
@@ -26,16 +26,16 @@ Liste des ressources - Translation
 		<tr>
 			<th>id</th>
 			<th>Nom de la ressource</th>
-			<th>Id du projet associé</th>
+			<th>Projet associé</th>
 			<th>--</th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach ($data ['ressources_list'] as $ressource)
+		@foreach ($ressources_list as $ressource)
 		<tr>
 			<td>{{ $ressource->id }}</td>
 			<td>{{ $ressource->ressource_name }}</td>
-			<td>{{ $ressource->project_id }}</td>
+			<td>{{ $ressource->project->name }}</td>
 			<td></td>
 		</tr>
 		@endforeach

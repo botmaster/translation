@@ -11,9 +11,9 @@ class Ressource extends \Eloquent {
 
 
 
-	public function projects()
+	public function project()
 	{
-		 return $this->belongsTo('Projects');
+		 return $this->belongsTo('Project');
 	}
 
 

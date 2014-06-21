@@ -36,7 +36,7 @@ class RessourcesController extends \BaseController {
 		$data = array(	'ressources_list' => $ressource,
 						'toto' => 'tutu');
 
-		return View::make('pages.ressources.index')->with('data', $data);
+		return View::make('pages.ressources.index', $data);
 	}
 
 	/**
