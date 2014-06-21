@@ -43,6 +43,7 @@ class ProjectsController extends \BaseController {
 		// Les ressources liéés.
 		$ressources  = $project->ressources;
 
+
 		$data = array('project' => $project);
 
 		return View::make('pages.projects.project_show', $data);

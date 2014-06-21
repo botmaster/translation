@@ -27,7 +27,12 @@ Liste des ressources - Translation
 			<th>id</th>
 			<th>Nom de la ressource</th>
 			<th>Projet associé</th>
-			<th>--</th>
+			
+			@foreach ($rt_list as $rt)
+			<th>
+				{{$rt->locale}}
+			</th>
+			@endforeach
 		</tr>
 	</thead>
 	<tbody>
@@ -36,7 +41,16 @@ Liste des ressources - Translation
 			<td>{{ $ressource->id }}</td>
 			<td>{{ $ressource->ressource_name }}</td>
 			<td>{{ $ressource->project->name }}</td>
-			<td></td>
+			@foreach ($rt_list as $rt)
+			<td>
+				@foreach ($ressource->ressourceTranslations as $ressource_translation)
+					@if ($ressource_translation->locale === $rt->locale)
+						{{ $ressource_translation->value }}
+					@endif
+				@endforeach
+				
+			</td>
+			@endforeach
 		</tr>
 		@endforeach
 	</tbody>

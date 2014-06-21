@@ -3,7 +3,7 @@
 class RessourceTranslation extends \Eloquent {
 
 
-	protected $fillable = ['value'];
+	protected $fillable = ['value', 'locale'];
 
 
 	public function ressources()

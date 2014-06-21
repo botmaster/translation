@@ -30,11 +30,24 @@ class RessourcesController extends \BaseController {
 	public function index()
 	{
 		// La liste des projects.
-		$ressource = $this->ressource->all();
+		$ressources = $this->ressource->all();
+
+
+		$rt_list = array();
+		$prev_locale = "";
+		foreach (RessourceTranslation::all() as $key => $rt) {
+			//
+			if($rt->locale != $prev_locale) {
+				$prev_locale = $rt->locale;
+				if(! in_array($rt, $rt_list)) {
+					array_push($rt_list, $rt);
+				}
+			}
+		}
 
 		// Le conteneur de données passées à la vue.
-		$data = array(	'ressources_list' => $ressource,
-						'toto' => 'tutu');
+		$data = array(	'ressources_list' => $ressources,
+						'rt_list' => $rt_list);
 
 		return View::make('pages.ressources.index', $data);
 	}
