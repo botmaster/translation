@@ -70,7 +70,6 @@ class ProjectsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-
 		// Les données du projet.
 		$project = $this->project->find($id);
 		return View::make('pages.projects.project_edit')->with('project', $project);

@@ -11,7 +11,7 @@
 	</div>
 	<div class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="{{ URL::to('/') }}">Accueil</a></li>
+			<li class=""><a href="{{ URL::to('/') }}">Accueil</a></li>
 			<li>{{link_to_route('ressources.index','Les ressources')}}</li>
 			<li>{{link_to_route('projects.index','Les projets')}}</li>
 			<li><a href="#contact">Contact</a></li>

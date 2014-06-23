@@ -20,6 +20,7 @@ Liste des ressources - Translation
 	</p>
 @endforeach
 
+<p><a href="{{ URL::to('ressources/create') }}">Créer une ressource</a></p>
 
 <table class="table">
 	<thead>

@@ -32,11 +32,10 @@ class RessourcesController extends \BaseController {
 		// La liste des projects.
 		$ressources = $this->ressource->all();
 
-
+		// On récupère les valeurs possibles de la locale.
 		$rt_list = array();
 		$prev_locale = "";
 		foreach (RessourceTranslation::all() as $key => $rt) {
-			//
 			if($rt->locale != $prev_locale) {
 				$prev_locale = $rt->locale;
 				if(! in_array($rt, $rt_list)) {
@@ -60,7 +59,12 @@ class RessourcesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		// On récupère la liste des projets.
+		$projects_list = Project::all()->lists('name', 'id');
+		//dd($projects_list);
+
+		// On affiche la vue de création de ressources.
+		return View::make('pages.ressources.create')->with('projects_list', $projects_list);
 	}
 
 	/**
@@ -71,7 +75,10 @@ class RessourcesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		//TODO: validate.
+		
+		/*$resource = new Ressource();
+		$resource->*/
 	}
 
 	/**
@@ -83,9 +90,7 @@ class RessourcesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		// Les données de la ressource.
-		$ressource = $this->ressource->find($id);
-		return View::make('pages.ressources.show')->with('ressource', $ressource);
+		
 	}
 
 	/**
@@ -97,7 +102,9 @@ class RessourcesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		// Les données de la ressource.
+		$ressource = $this->ressource->find($id);
+		return View::make('pages.ressources.show')->with('ressource', $ressource);
 	}
 
 	/**
