@@ -6,7 +6,7 @@ Edition d'une ressource - Translation
 
 @section('content')
 <div class="page-header">
-	<h2>&Eacute;dition d'une ressource : {{$ressource->ressource_name}}</h2>
+	<h2>&Eacute;dition de la ressource : {{$ressource->ressource_name}}</h2>
 </div>
 
 <!-- if there are creation errors, they will show here -->

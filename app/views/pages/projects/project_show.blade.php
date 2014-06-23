@@ -28,7 +28,7 @@ D&eacute;tail d'un projet - Translation
 			<td>{{ $ressource->id }}</td>
 			<td>{{ $ressource->ressource_name }}</td>
 			<td>
-			{{$ressource->translate()->value}} <br>
+			{{$ressource->ressource_name}} <br>
 			
 			@foreach ($ressource->ressourceTranslations as $ressourceTranslation)
 				{{$ressourceTranslation->locale}} : {{$ressourceTranslation->value}} <br>

@@ -34,6 +34,7 @@ Liste des ressources - Translation
 				{{$rt->locale}}
 			</th>
 			@endforeach
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -49,9 +50,12 @@ Liste des ressources - Translation
 						{{ $ressource_translation->value }}
 					@endif
 				@endforeach
-				
 			</td>
 			@endforeach
+			<td>
+				{{link_to_route('ressources.show','Détail',$ressource->id, array('class' => 'btn btn-default btn-xs'))}}
+				{{link_to_route('ressources.edit','Éditer',$ressource->id, array('class' => 'btn btn-default btn-xs'))}}
+			</td>
 		</tr>
 		@endforeach
 	</tbody>

@@ -33,20 +33,15 @@ class RessourcesController extends \BaseController {
 		$ressources = $this->ressource->all();
 
 		// On récupère les valeurs possibles de la locale.
-		$rt_list = array();
-		$prev_locale = "";
-		foreach (RessourceTranslation::all() as $key => $rt) {
-			if($rt->locale != $prev_locale) {
-				$prev_locale = $rt->locale;
-				if(! in_array($rt, $rt_list)) {
-					array_push($rt_list, $rt);
-				}
-			}
+		$rt_list = RessourceTranslation::all();
+		$rt_list_unique = array();
+		foreach ($rt_list as $obj) {
+		    $rt_list_unique[$obj->locale] = $obj;
 		}
 
 		// Le conteneur de données passées à la vue.
-		$data = array(	'ressources_list' => $ressources,
-						'rt_list' => $rt_list);
+		$data = array('ressources_list' => $ressources,
+			'rt_list' => $rt_list_unique);
 
 		return View::make('pages.ressources.index', $data);
 	}
@@ -76,45 +71,46 @@ class RessourcesController extends \BaseController {
 	public function store()
 	{
 		//TODO: validate.
-		
-		/*$resource = new Ressource();
-		$resource->*/
 
-		//$input_data = Input::all();
-
+		// On rempli les modèles avec le contenu du formulaire.
 		$ressource = $this->ressource;
 		$ressource->fill(Input::all());
-
-		//$ressource->save();
-
 
 		$rt = new RessourceTranslation();
 		$rt->fill(Input::all());
 
-		//return Response::json($ressource);
 
-		//$ressource->ressourceTranslations()->save($rt);
+		// On valide que les données remplis sont bonnes.
+		if (! $this->ressource->isValid()) {
+			return Redirect::back()->withInput()->withErrors($this->ressource->errors);
+		} else if (! $rt->isValid()) {
+			return Redirect::back()->withInput()->withErrors($rt->errors);
+		} else {
+			
+			// Tout va bien, on enregistre tout.
+			DB::beginTransaction(); //Start transaction!
+
+			try{
+			   	// On enregistre la ressource.
+				$ressource->save();
+
+				// On lui passe la traduction.
+				$ressource->ressourceTranslations()->save($rt);
+			}
+			catch(\Exception $e)
+			{
+			  //failed logic here
+				DB::rollback();
+				throw $e;
+			}
+
+			DB::commit();
+
+			Session::flash('message', 'La ressource à été crée !');
+			return Redirect::to('ressources');
+		}
 		
-		DB::beginTransaction(); //Start transaction!
-
-		try{
-		   //saving logic here
-		   $ressource->save();
-		   $ressource->ressourceTranslations()->save($rt);
-		}
-		catch(\Exception $e)
-		{
-		  //failed logic here
-		   DB::rollback();
-		   throw $e;
-		}
-
-		DB::commit();
-
-		//return Response::json($rt);
-		// redirect
-		Session::flash('message', 'La ressource à été correctement créee !');
-		return Redirect::to('ressources');
+		
 	}
 
 	/**
@@ -126,7 +122,12 @@ class RessourcesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		
+		// Les données du projet.
+		$ressource = $this->ressource->find($id);
+
+		$data = array('ressource' => $ressource);
+
+		return View::make('pages.ressources.show', $data);
 	}
 
 	/**
@@ -140,7 +141,7 @@ class RessourcesController extends \BaseController {
 	{
 		// Les données de la ressource.
 		$ressource = $this->ressource->find($id);
-		return View::make('pages.ressources.show')->with('ressource', $ressource);
+		return View::make('pages.ressources.edit')->with('ressource', $ressource);
 	}
 
 	/**
@@ -164,7 +165,13 @@ class RessourcesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete
+		$ressource = $this->ressource->find($id);
+		$ressource->delete();
+
+		// redirect
+		Session::flash('message', 'Ressource supprimé !');
+		return Redirect::to('ressources');
 	}
 
 }
