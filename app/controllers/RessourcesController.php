@@ -79,6 +79,42 @@ class RessourcesController extends \BaseController {
 		
 		/*$resource = new Ressource();
 		$resource->*/
+
+		//$input_data = Input::all();
+
+		$ressource = $this->ressource;
+		$ressource->fill(Input::all());
+
+		//$ressource->save();
+
+
+		$rt = new RessourceTranslation();
+		$rt->fill(Input::all());
+
+		//return Response::json($ressource);
+
+		//$ressource->ressourceTranslations()->save($rt);
+		
+		DB::beginTransaction(); //Start transaction!
+
+		try{
+		   //saving logic here
+		   $ressource->save();
+		   $ressource->ressourceTranslations()->save($rt);
+		}
+		catch(\Exception $e)
+		{
+		  //failed logic here
+		   DB::rollback();
+		   throw $e;
+		}
+
+		DB::commit();
+
+		//return Response::json($rt);
+		// redirect
+		Session::flash('message', 'La ressource à été correctement créee !');
+		return Redirect::to('ressources');
 	}
 
 	/**

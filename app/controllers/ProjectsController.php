@@ -38,10 +38,10 @@ class ProjectsController extends \BaseController {
 	public function show($id)
 	{
 		// Les données du projet.
-		$project = $this->project->find($id)->first();
+		$project = $this->project->find($id);
 
 		// Les ressources liéés.
-		$ressources  = $project->ressources;
+		//$ressources  = $project->ressources;
 
 
 		$data = array('project' => $project);

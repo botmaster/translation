@@ -24,8 +24,8 @@ Cr&eacute;ation d'une ressource - Translation
 	{{ Form::text('locale', Input::old('locale'), array('class' => 'form-control')) }}
 </div>
 <div class="form-group">
-	{{ Form::label('projects_list','Projet associé') }}
-	{{ Form::select('projects_list', $projects_list, null, array('class' => 'form-control'))}}
+	{{ Form::label('project_id','Projet associé') }}
+	{{ Form::select('project_id', $projects_list, null, array('class' => 'form-control'))}}
 </div>
 <!-- <div class="form-group">
 	{{ Form::label('description','Description :') }}
