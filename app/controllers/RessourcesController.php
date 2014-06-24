@@ -33,11 +33,7 @@ class RessourcesController extends \BaseController {
 		$ressources = $this->ressource->all();
 
 		// On récupère les valeurs possibles de la locale.
-		$rt_list = RessourceTranslation::all();
-		$rt_list_unique = array();
-		foreach ($rt_list as $obj) {
-		    $rt_list_unique[$obj->locale] = $obj;
-		}
+		$rt_list_unique = RessourceTranslation::first()->getLocalesUniqueList();
 
 		// Le conteneur de données passées à la vue.
 		$data = array('ressources_list' => $ressources,
@@ -56,7 +52,6 @@ class RessourcesController extends \BaseController {
 	{
 		// On récupère la liste des projets.
 		$projects_list = Project::all()->lists('name', 'id');
-		//dd($projects_list);
 
 		// On affiche la vue de création de ressources.
 		return View::make('pages.ressources.create')->with('projects_list', $projects_list);
@@ -141,7 +136,10 @@ class RessourcesController extends \BaseController {
 	{
 		// Les données de la ressource.
 		$ressource = $this->ressource->find($id);
-		return View::make('pages.ressources.edit')->with('ressource', $ressource);
+
+		$data = array('ressource' => $ressource, 'rt_list' => $ressource->ressourceTranslations()->get());
+		//dd($ressource->ressourceTranslations()->get());
+		return View::make('pages.ressources.edit', $data);
 	}
 
 	/**

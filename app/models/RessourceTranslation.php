@@ -31,4 +31,14 @@ class RessourceTranslation extends \Eloquent {
 		 return $this->belongsTo('Ressource');
 	}
 
+	public function getLocalesUniqueList()
+	{
+		$rt_list = $this->all();
+		$rt_list_unique = array();
+		foreach ($rt_list as $obj) {
+		    $rt_list_unique[$obj->locale] = $obj;
+		}
+		return $rt_list_unique;
+	}
+
 }

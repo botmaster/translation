@@ -17,9 +17,10 @@ Projets - Translation
 	<li class="list-group-item ">{{$project->name}} <br/>
 	{{$project->description}}
 		<div>
-			{{link_to_route('projects.show','Détail',$project->id, array('class' => 'btn btn-default btn-xs'))}}
-			{{link_to_route('projects.edit','Éditer',$project->id, array('class' => 'btn btn-default btn-xs'))}}
-			{{ Form::open(array('url' => 'projects/' . $project->id)) }}
+			
+			{{ Form::open(array('url' => 'projects/' . $project->id, 'class' => 'form-inline')) }}
+				{{link_to_route('projects.show','Détail',$project->id, array('class' => 'btn btn-default btn-xs'))}}
+				{{link_to_route('projects.edit','Éditer',$project->id, array('class' => 'btn btn-default btn-xs'))}}
 				{{ Form::hidden('_method', 'DELETE') }}
 				{{ Form::button('Supprimer', array('type' => 'submit', 'class' => 'btn btn-warning btn-xs')) }}
 			{{ Form::close() }}

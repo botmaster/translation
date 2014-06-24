@@ -16,41 +16,69 @@ class RessourcesTableSeeder extends Seeder {
 			]);
 		}*/
 
-		/*DB::table('projects')->insert(
+		/*<string name="yes">Oui</string>
+		<string name="no">Non</string>
+		<string name="leave">Quitter l'application ?</string>
+		<string name="ok">OK</string>
+		<string name="cancel">Annuler</string>
+		<string name="confirm">Confirmer</string>
+		<string name="delete">Supprimer</string>
+		<string name="done">Terminé</string>
+		<string name="agree">Accepter</string>
+		<string name="submit">Valider</string>*/
 
-			array(
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'yes'
-					),
+		$ressource1 = Ressource::create([
+			'ressource_name' => 'confirm',
+			'project_id' => '1'
+		]);
 
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'no'
-					),
+		$ressource2 = Ressource::create([
+			'ressource_name' => 'delete',
+			'project_id' => '1'
+		]);
 
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'ok'
-					),
+		$ressource3 = Ressource::create([
+			'ressource_name' => 'done',
+			'project_id' => '1'
+		]);
 
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'cancel'
-					),
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource1->id,
+			'value' => 'Confirm',
+			'locale' => 'en'
+		]);
 
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'confirm'
-					),
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource2->id,
+			'value' => 'Delete',
+			'locale' => 'en'
+		]);
 
-				array(
-					'project_id' => 1,
-					'ressource_name' => 'delete'
-					),
-			)
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource3->id,
+			'value' => 'Done',
+			'locale' => 'en'
+		]);
 
-		);*/
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource1->id,
+			'value' => 'Confirmer',
+			'locale' => 'fr'
+		]);
+
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource2->id,
+			'value' => 'Supprimer',
+			'locale' => 'fr'
+		]);
+
+		$rt = RessourceTranslation::create([
+			'ressource_id' => $ressource3->id,
+			'value' => 'Terminé',
+			'locale' => 'fr'
+		]);
+
+
 	}
 
 }
