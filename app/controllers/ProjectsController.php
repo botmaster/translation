@@ -112,24 +112,20 @@ class ProjectsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		// validate
-		// read more on validation at http://laravel.com/docs/validation
-		$rules = array(
-			'name'       => 'required',
-			'description'      => 'required'
-		);
-		$validator = Validator::make(Input::all(), $rules);
 
-		// store
 		$project = $this->project->find($id);
-		$project->name       		= Input::get('name');
-		$project->description       = Input::get('description');
-		$project->save();
+		$project->fill(Input::all());
 
-		// redirect
-		Session::flash('message', 'Projet mis à jour !');
-		return Redirect::to('projects');
-		
+		if (! $project->isValid()) {
+			return Redirect::back()->withInput()->withErrors($project->errors);
+		} else {
+			// store
+			$project->save();
+
+			// redirect
+			Session::flash('message', 'Le projet à été correctement crée !');
+			return Redirect::to('projects');
+		}
 	}
 
 

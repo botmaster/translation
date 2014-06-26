@@ -20,9 +20,12 @@ class HomeController extends BaseController {
 	 */
 	public function index()
 	{
+
+		// On affiche la vue.
+		return $this->showHome();
 		
 		//On affiche la liste des projets.
-		return $this->showProjectsList();
+		//return $this->showProjectsList();
 
 	}
 
@@ -36,6 +39,11 @@ class HomeController extends BaseController {
 
 		// On va sur l'url des projects.
 		return Redirect::to('projects');
+	}
+
+	public function showHome()
+	{
+		return View::make('pages.home');
 	}
 
 }

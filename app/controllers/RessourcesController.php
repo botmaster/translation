@@ -72,8 +72,8 @@ class RessourcesController extends \BaseController {
 		$ressource->fill(Input::all());
 
 		$rt = new RessourceTranslation();
-		$rt->fill(Input::all());
-
+		$rt->value = Input::get('value');
+		$rt->locale = Str::lower(Input::get('locale'));
 
 		// On valide que les données remplis sont bonnes.
 		if (! $this->ressource->isValid()) {
