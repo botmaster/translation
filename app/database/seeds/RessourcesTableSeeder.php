@@ -39,7 +39,7 @@ class RessourcesTableSeeder extends Seeder {
 
 		$ressource3 = Ressource::create([
 			'ressource_name' => 'done',
-			'project_id' => '1'
+			'project_id' => '2'
 		]);
 
 		$rt = RessourceTranslation::create([

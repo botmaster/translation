@@ -11,13 +11,14 @@ class ProjectsTableSeeder extends Seeder {
 		
 		$faker = Faker::create();
 		$faker->addProvider(new FakerProvider\fr_FR\Company($faker));
+		$faker->addProvider(new FakerProvider\fr_FR\Text($faker));
 
 
-		foreach(range(1, 50) as $index)
+		foreach(range(1, 8) as $index)
 		{
 			Project::create([
 				'name' => $faker->company,
-				'description' => $faker->text
+				'description' => $faker->realText($maxNbChars = 200)
 			]);
 		}
 		
