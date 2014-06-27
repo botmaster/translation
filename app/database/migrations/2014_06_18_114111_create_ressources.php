@@ -32,6 +32,7 @@ class CreateRessources extends Migration {
 		    $table->integer('ressource_id')->unsigned()->index();
 	        $table->string('value');
 	        $table->string('locale')->index();
+	        $table->timestamps();
 
 		    $table->unique(['ressource_id','locale']);
 		    $table->foreign('ressource_id')->references('id')->on('ressources')->onDelete('cascade');

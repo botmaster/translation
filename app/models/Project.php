@@ -4,7 +4,7 @@ class Project extends Eloquent {
 	// validate
 	// read more on validation at http://laravel.com/docs/validation
 	public static $rules = [
-		'name' => 'required',
+		'name' => 'required|unique:projects',
 		'description' => 'required'
 	];
 

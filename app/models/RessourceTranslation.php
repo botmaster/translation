@@ -12,7 +12,7 @@ class RessourceTranslation extends \Eloquent {
 
 	protected $fillable = ['value', 'locale'];
 
-	public $timestamps = false;
+	//public $timestamps = false;
 
 	public function isValid()
 	{

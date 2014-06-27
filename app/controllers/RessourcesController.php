@@ -30,7 +30,12 @@ class RessourcesController extends \BaseController {
 	public function index()
 	{
 		// La liste des projects.
+		//$ressources = $this->ressource->all();
+		//$ressources = Ressource::with('ressourceTranslations')->get();
 		$ressources = $this->ressource->all();
+		$ressources->load('ressourceTranslations', 'project');
+
+		//return $ressources;
 
 		// On récupère les valeurs possibles de la locale.
 		$rt_list_unique = RessourceTranslation::first()->getLocalesUniqueList();
@@ -120,9 +125,9 @@ class RessourcesController extends \BaseController {
 		// Les données du projet.
 		$ressource = $this->ressource->find($id);
 
-		$data = array('ressource' => $ressource);
+		//$data = array('ressource' => $ressource);
 
-		return View::make('pages.ressources.show', $data);
+		return View::make('pages.ressources.show', compact('ressource'));
 	}
 
 	/**

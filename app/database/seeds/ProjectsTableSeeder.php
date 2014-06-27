@@ -1,34 +1,26 @@
 <?php
 
+use Faker\Factory as Faker;
+use Faker\Provider as FakerProvider;
+
 class ProjectsTableSeeder extends Seeder {
+
 
 	public function run()
 	{
-		DB::table('projects')->insert(
+		
+		$faker = Faker::create();
+		$faker->addProvider(new FakerProvider\fr_FR\Company($faker));
 
-			array(
-				array(
-					'name' => 'Roche - Gluci-chek',
-					'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, illum.'
-					),
 
-				array(
-					'name' => 'Petzl - Sell-in',
-					'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, illum.'
-					),
-
-				array(
-					'name' => 'Mon client - Mon projet',
-					'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, illum.'
-					),
-
-				array(
-					'name' => 'Mon super client - Mon super projet',
-					'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, illum.'
-					)
-			)
-
-		);
+		foreach(range(1, 50) as $index)
+		{
+			Project::create([
+				'name' => $faker->company,
+				'description' => $faker->text
+			]);
+		}
+		
 	}
 
 }

@@ -14,7 +14,7 @@ class CreateProjects extends Migration {
 	{
 		Schema::create('projects', function($table) {
 		            $table->increments('id');
-		            $table->string('name', 200);
+		            $table->string('name', 200)->unique();
 		            $table->string('description');
 		            $table->timestamps();
 		        });

@@ -1,5 +1,10 @@
 <?php
 
+Event::listen('illuminate.query', function ($query)
+{
+	//var_dump($query);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,7 +17,6 @@
 */
 
 Route::get('/', 'HomeController@index');
-
 
 Route::resource('projects', 'ProjectsController');
 

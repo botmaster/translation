@@ -12,7 +12,7 @@ Projets - Translation
 <p><a href="{{ URL::to('projects/create') }}">Créer un projet</a></p>
 
 <ul class="list-group">
-	@foreach ($data ['projects_list'] as $project)
+	@foreach ($projects_list as $project)
 
 	<li class="list-group-item ">{{$project->name}} <br/>
 	{{$project->description}}
@@ -30,6 +30,10 @@ Projets - Translation
 
 	@endforeach
 </ul>
+
+<div>
+	{{ $projects_list->links() }}
+</div>
 
 @stop
 

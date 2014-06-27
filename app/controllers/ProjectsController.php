@@ -18,14 +18,16 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
+
 		// La liste des projects.
-		$projects = $this->project->all();
+		//$projects = $this->project->all();
+		$projects = $this->project->paginate(5);
 
 		// Les données passées à la vue.
 		$data = array(	'projects_list' => $projects,
 						'toto' => 'tutu');
 
-		return View::make('pages.projects.project_list')->with('data', $data);
+		return View::make('pages.projects.project_list', $data);
 
 	}
 
