@@ -118,7 +118,7 @@ class ProjectsController extends \BaseController {
 		$project = $this->project->find($id);
 		$project->fill(Input::all());
 
-		if (! $project->isValid()) {
+		if (! $project->isValid(true)) {
 			return Redirect::back()->withInput()->withErrors($project->errors);
 		} else {
 			// store

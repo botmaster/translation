@@ -3,18 +3,22 @@ class Project extends Eloquent {
 
 	// validate
 	// read more on validation at http://laravel.com/docs/validation
-	public static $rules = [
-		'name' => 'required|unique:projects',
+	public $rules = array(
+		'name' => 'required|unique:projects,name',
 		'description' => 'required'
-	];
+	);
 
 	public $errors;
 
 	protected $fillable = ['name', 'description'];
 
-	public function isValid()
+	public function isValid($editing = false)
 	{
-		$validator = Validator::make($this->attributes, static::$rules);
+		// On est en édtion ?
+		if($editing) {
+			$this->rules['name'] = $this->rules['name'] . ',' . $this->id;
+		}
+		$validator = Validator::make($this->attributes, $this->rules);
 
 		if($validator->passes()) return true;
 

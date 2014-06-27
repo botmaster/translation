@@ -27,7 +27,7 @@ Liste des ressources - Translation
 		<tr>
 			<th>id</th>
 			<th>Nom de la ressource</th>
-			<th>Projet associé</th>
+			<th>Projet associ&eacute;</th>
 			
 			@foreach ($rt_list as $rt)
 			<th>
